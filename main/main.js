@@ -22,11 +22,12 @@ class Block {
         // let encryted = SHA256(this.index + this.timestamp + this.perviousHash + JSON.stringify(this.txn));
         // console.log("encryted",encryted);
         // console.log("encryted toString",encryted.toString());
-        return SHA256(this.index + this.perviousHash + this.timestamp  + JSON.stringify(this.txn) + this.nonce).toString();
+        return SHA256(this.perviousHash + this.timestamp  + JSON.stringify(this.txn) + this.nonce).toString();
     }
 
     mineBlock(difficulty){
         while(this.hash.substring(0,difficulty) !== Array(difficulty+1).join("0")){
+            console.log("nonce = ",this.nonce);
             this.nonce++;
             this.hash = this.calculateHash();
         }
